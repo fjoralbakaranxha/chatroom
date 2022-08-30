@@ -66,13 +66,6 @@ public class ChatRoomService {
     }
 
 
-//    public void updateMessage(Message message, String id) {
-//        Optional<Message> messageOptional = chatRepository.findById(id);
-//        (messageOptional.isPresent()) {
-//
-//            Message messageToUpdate = messageOptional.get();
-//            BeanUtils.copyProperties(message, messageToUpdate);
-//            chatRepository.save(messageToUpdate);
-//        }
+
 }
 

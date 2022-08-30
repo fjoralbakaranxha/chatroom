@@ -61,30 +61,5 @@ public class ChatController {
             return new ResponseEntity("Room not found", HttpStatus.NOT_FOUND);
         }
     }
-//    @RequestMapping(method = RequestMethod.PUT, value = "/message/{id}")
-//    public ResponseEntity updateMessage(@RequestBody Message message, @PathVariable String id) {
-//        System.out.println(id);
-//
-//            chatroomService.updateMessage(message, id);
-//            return new ResponseEntity("Message is updated!", HttpStatus.OK);
-//    }
-
-
-
-
-
-//    @MessageMapping ("/chat.register")
-//    @SendTo("/topic/public")
-//    public ChatRoom register(@Payload ChatRoom chatMessage, SimpMessageHeaderAccessor headerAccessor) {
-//        headerAccessor.getSessionAttributes().put("username", chatMessage.getSender());
-//        return chatMessage;
-//    }
-//
-//    @MessageMapping("/chat.send")
-//    @SendTo("/topic/public")
-//    public ChatRoom sendMessage(@Payload ChatRoom chatMessage) {
-//        return chatMessage;
-//    }
-
 
 }
