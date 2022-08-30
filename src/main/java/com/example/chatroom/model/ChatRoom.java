@@ -20,6 +20,6 @@ public class ChatRoom {
     private String id;
     private String roomName;
 
- @DBRef
-   private List<Message> messages;
+
+    private List<Message> messages;
 }

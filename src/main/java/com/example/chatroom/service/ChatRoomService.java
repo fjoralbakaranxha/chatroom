@@ -4,11 +4,13 @@ import com.example.chatroom.model.ChatRoom;
 import com.example.chatroom.model.Message;
 import com.example.chatroom.repository.ChatRepository;
 import com.example.chatroom.repository.RoomRepository;
-import org.springframework.beans.BeanUtils;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.annotation.Id;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,6 +32,7 @@ public class ChatRoomService {
     }
 
     public ChatRoom addRoom(ChatRoom chatRoom) {
+        chatRoom.setMessages(Collections.emptyList());
         return roomRepository.save(chatRoom);
     }
 
@@ -42,8 +45,24 @@ public class ChatRoomService {
         }
     }
 
-    public Message addMessage(Message message) {
-        return chatRepository.save(message);
+    public Message addMessage(Message message) throws Exception {
+        message.setId(new ObjectId().toString());
+        Optional<ChatRoom> chatRoom = roomRepository.findById(message.getCurrentRoomId());
+        if (!chatRoom.isPresent()) {
+            throw new Exception("Room not found!");
+        }
+        ChatRoom chRoom = chatRoom.get();
+        List<Message> messages = chRoom.getMessages();
+        if (chRoom.getMessages() == null) {
+            chRoom.setMessages(Collections.emptyList());
+        }
+        messages.add(message);
+        chRoom.setMessages(messages);
+        roomRepository.save(chRoom);
+        return message;
+    }
+    public Optional<ChatRoom> getRoomById(String id) {
+        return roomRepository.findById(id);
     }
 
 
@@ -55,8 +74,5 @@ public class ChatRoomService {
 //            BeanUtils.copyProperties(message, messageToUpdate);
 //            chatRepository.save(messageToUpdate);
 //        }
-    }
-
-
-
+}
 

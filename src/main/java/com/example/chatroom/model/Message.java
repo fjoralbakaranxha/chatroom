@@ -21,5 +21,5 @@ public class Message {
     private Number userId;
     private String content;
 
-    private String chatRoomId;
+    private String currentRoomId;
 }

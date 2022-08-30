@@ -7,7 +7,5 @@ import org.springframework.data.mongodb.repository.Query;
 
 import java.util.Optional;
 
-public interface RoomRepository extends MongoRepository <ChatRoom, Id> {
-    @Query("{'id':?0}")
-    Optional<ChatRoom> findById(Id id);
+public interface RoomRepository extends MongoRepository <ChatRoom, String> {
 }

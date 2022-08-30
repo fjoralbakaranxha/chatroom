@@ -44,7 +44,7 @@ public class ChatController {
         } catch (Exception e) {
             return new ResponseEntity(e.getMessage(), HttpStatus.OK);
         }
-        }
+    }
 
     @RequestMapping(method = RequestMethod.GET, value = "/message")
     public ResponseEntity getMessage() {
@@ -52,6 +52,15 @@ public class ChatController {
         return new ResponseEntity(message, HttpStatus.OK);
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/rooms/{id}")
+    public ResponseEntity getRoom(@PathVariable String id) {
+        Optional<ChatRoom> chatroomOptional = chatroomService.getRoomById(id);
+        if (chatroomOptional.isPresent()) {
+            return new ResponseEntity(chatroomOptional, HttpStatus.OK);
+        } else {
+            return new ResponseEntity("Room not found", HttpStatus.NOT_FOUND);
+        }
+    }
 //    @RequestMapping(method = RequestMethod.PUT, value = "/message/{id}")
 //    public ResponseEntity updateMessage(@RequestBody Message message, @PathVariable String id) {
 //        System.out.println(id);
