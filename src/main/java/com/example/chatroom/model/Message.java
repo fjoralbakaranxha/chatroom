@@ -20,6 +20,7 @@ public class Message {
     private String username;
     private Number userId;
     private String content;
+    private String type;
 
     private String currentRoomId;
 }

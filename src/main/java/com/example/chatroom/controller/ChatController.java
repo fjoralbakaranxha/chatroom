@@ -20,6 +20,7 @@ public class ChatController {
     @Autowired
     private ChatRoomService chatroomService;
 
+
     @RequestMapping(method = RequestMethod.GET, value = "/rooms")
     public ResponseEntity getRooms() {
         List<ChatRoom> rooms = chatroomService.getRooms();
@@ -62,4 +63,10 @@ public class ChatController {
         }
     }
 
+//    @RequestMapping(method = RequestMethod.PUT, value = "/message/{id}")
+//    public ResponseEntity updateMessage(@RequestBody Message message, @PathVariable String id) {
+//        System.out.println(id);
+//            chatroomService.updateMessage(message, id);
+//
+//    }
 }

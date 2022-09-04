@@ -1,12 +1,12 @@
 package com.example.chatroom.service;
 
+import com.example.chatroom.controller.WSChatController;
 import com.example.chatroom.model.ChatRoom;
 import com.example.chatroom.model.Message;
 import com.example.chatroom.repository.ChatRepository;
 import com.example.chatroom.repository.RoomRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.annotation.Id;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -22,9 +22,10 @@ public class ChatRoomService {
     @Autowired
     private ChatRepository chatRepository;
 
+
     public List<ChatRoom> getRooms() {
         List<ChatRoom> rooms = roomRepository.findAll();
-        if(rooms.size() > 0) {
+        if (rooms.size() > 0) {
             return rooms;
         } else {
             return new ArrayList<>();
@@ -38,7 +39,7 @@ public class ChatRoomService {
 
     public List<Message> getMessage() {
         List<Message> message = chatRepository.findAll();
-        if(message.size() > 0) {
+        if (message.size() > 0) {
             return message;
         } else {
             return new ArrayList<>();
@@ -59,13 +60,35 @@ public class ChatRoomService {
         messages.add(message);
         chRoom.setMessages(messages);
         roomRepository.save(chRoom);
+
         return message;
     }
+
+
     public Optional<ChatRoom> getRoomById(String id) {
         return roomRepository.findById(id);
     }
 
+    public Message editMessage(Message message) throws Exception {
+        Optional<ChatRoom> chatRoom = roomRepository.findById(message.getCurrentRoomId());
+        if (!chatRoom.isPresent()) {
+            throw new Exception("Not found!");
+        }
+        ChatRoom chRoom = chatRoom.get();
+        List<Message> messages = chRoom.getMessages();
+        for (Message m : messages) {
+            if (m.getId().equals(message.getId())) {
+                m.setContent(message.getContent());
+            }
+        }
+        chRoom.setMessages(messages);
+        roomRepository.save(chRoom);
 
-
+        return message;
+    }
 }
+
+
+
+
 
