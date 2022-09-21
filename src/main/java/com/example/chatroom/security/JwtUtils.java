@@ -9,6 +9,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
+import java.util.Objects;
 
 @Component
 public class JwtUtils {
@@ -32,6 +33,8 @@ public class JwtUtils {
     }
 
     public boolean validateJwtToken(String authToken) {
+        if(Objects.isNull(authToken))
+            return false;
         try {
             Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);
             return true;

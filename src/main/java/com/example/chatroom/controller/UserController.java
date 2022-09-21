@@ -5,6 +5,7 @@ import com.example.chatroom.payload.LoginPayload;
 import com.example.chatroom.payload.RegisterPayload;
 import com.example.chatroom.repository.UserRepository;
 import com.example.chatroom.response.JwtResponse;
+import com.example.chatroom.response.MsgResponse;
 import com.example.chatroom.security.JwtUtils;
 import com.example.chatroom.service.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +49,7 @@ public class UserController {
                 userRepository.save(user);
 
 
-        return new ResponseEntity("User registered successfully", HttpStatus.OK);
+        return new ResponseEntity(new MsgResponse("User registered successfully"), HttpStatus.OK);
     }
 
     @PostMapping("/signin")
