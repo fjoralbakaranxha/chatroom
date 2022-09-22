@@ -18,7 +18,7 @@ public class Message {
     @Id
     private String id;
     private String username;
-    private Number userId;
+    private String userId;
     private String content;
     private String type;
 
