@@ -1,7 +1,6 @@
 package com.example.chatroom.security;
 
 import com.example.chatroom.service.UserDetailsServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -29,8 +28,6 @@ public class AuthTokenFilter  extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
         try {
-
-
             String jwt = request.getHeader("Authorization");
             if (jwt != null && jwtUtils.validateJwtToken(jwt.substring(7))) {
                 jwt = jwt.substring(7);

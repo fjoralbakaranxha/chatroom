@@ -3,8 +3,6 @@ package com.example.chatroom.controller;
 import com.example.chatroom.model.Message;
 import com.example.chatroom.service.ChatRoomService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
